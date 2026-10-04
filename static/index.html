@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Chess Lab · Schachtraining</title>
+  <link rel="icon" type="image/svg+xml" href="/brand/favicon.svg">
+  <meta name="application-name" content="Chess Lab">
+  <meta name="theme-color" content="#22221f">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/vendor/lucide.min.js" defer></script>
+  <script src="/sounds.js" defer></script>
+  <script src="/app.js" defer></script>
+</head>
+<body>
+<div id="chess-studio-v1">
+  <div class="cs-window">
+    <header class="cs-header">
+      <a class="cs-brand" href="/" aria-label="Chess Lab Start"><svg class="brand-mark" viewBox="0 0 48 58" aria-hidden="true"><circle cx="24" cy="9" r="6" fill="currentColor"/>
+  <g fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M18 20h12M20 20v7L11 42c-1.4 2.5-.1 5 3 5h20c3.1 0 4.4-2.5 3-5l-9-15v-7"/>
+    <path d="M10 53h28"/>
+  </g>
+  <path d="M16.4 35h15.2l5 8.4c.4.7 0 1.2-.7 1.2H12.1c-.7 0-1.1-.5-.7-1.2Z" fill="currentColor"/></svg><span class="brand-wordmark"><span class="brand-chess">Chess</span><span class="brand-lab">Lab</span></span></a>
+      <div class="cs-header-right">
+        <div class="cs-appearance" role="group" aria-label="Darstellung">
+          <button type="button" data-theme="light" aria-pressed="true">Hell</button>
+          <button type="button" data-theme="dark" aria-pressed="false">Dunkel</button>
+        </div>
+        <button class="cs-textbutton" data-action="history">Mein Training</button>
+        <button class="cs-textbutton" data-action="settings">Einstellungen</button>
+        <button class="cs-textbutton" data-action="new-menu">Neue Partie</button>
+      </div>
+    </header>
+    <div id="notice" role="alert" hidden></div>
+    <main>
+      <section class="cs-onboard" id="onboarding" hidden aria-label="Einführung">
+        <div class="cs-intro"><div><span class="cs-kicker cs-muted">Dein persönliches Training</span><h1>Ein guter Zug.<br>Ein klarer Gedanke.</h1><p>Spiele in deinem Tempo. Dein Coach hilft dir, Ideen zu sehen und selbst weiterzudenken.</p></div><div class="cs-piece-row" id="intro-pieces" aria-hidden="true"></div></div>
+        <div class="cs-form"><div class="cs-form-head"><span class="cs-kicker cs-muted" id="step-title"></span><div class="cs-dots" aria-hidden="true"><span></span><span></span><span></span></div></div><div id="setup-content"></div><div class="cs-actions" id="setup-actions"></div></div>
+      </section>
+      <section class="cs-game" id="game" hidden aria-label="Trainingspartie">
+        <div class="cs-board-column">
+          <div class="board-toolbar" role="group" aria-label="Brettwerkzeuge">
+            <div class="tool-group">
+              <button class="tool-button" data-action="draw" aria-label="Pfeile zeichnen" title="Pfeile zeichnen · auch per Rechtsziehen" aria-pressed="false"><i data-lucide="move-up-right" aria-hidden="true"></i></button>
+              <button class="tool-button" data-action="clear-arrows" aria-label="Eigene Pfeile löschen" title="Eigene Pfeile löschen" disabled><i data-lucide="eraser" aria-hidden="true"></i></button>
+            </div>
+            <div class="tool-group">
+              <button class="tool-button" data-action="undo" aria-label="Zug zurücknehmen" title="Zug zurücknehmen"><i data-lucide="undo-2" aria-hidden="true"></i></button>
+              <button class="tool-button" data-action="flip" aria-label="Brett drehen" title="Brett drehen"><i data-lucide="rotate-cw" aria-hidden="true"></i></button>
+              <button class="tool-button" data-action="toggle-advantage" aria-label="Vorteil einblenden" title="Vorteil einblenden" aria-pressed="false"><i data-lucide="chart-no-axes-combined" aria-hidden="true"></i></button>
+            </div>
+            <div class="tool-group">
+              <button class="tool-button" data-action="moves" aria-label="Zugverlauf" title="Zugverlauf"><i data-lucide="list-ordered" aria-hidden="true"></i></button>
+              <a class="tool-button" href="/api/export/pgn" download aria-label="PGN speichern" title="PGN speichern"><i data-lucide="download" aria-hidden="true"></i></a>
+              <button class="tool-button" data-action="claim_draw" id="claim-draw" aria-label="Remis reklamieren" title="Remis reklamieren" hidden><i data-lucide="handshake" aria-hidden="true"></i></button>
+            </div>
+            <span id="drawing-help" class="cs-sr">Rechtsziehen für einen Pfeil</span><span id="drawing-status" class="cs-sr" role="status"></span>
+          </div>
+          <div class="board-stage">
+            <section class="advantage-strip" id="advantage-strip" aria-label="Aktueller Vorteil" hidden>
+              <div class="advantage-head"><span class="cs-sr">Engine-Vorteil</span><span id="advantage-value" class="advantage-value" aria-live="polite">…</span></div>
+              <div class="advantage-rail"><div class="advantage-track" role="progressbar" aria-label="Vorteil aus Sicht von Weiß" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><span id="advantage-marker"></span></div><div class="advantage-scale"><span>Schwarz</span><span>Gleich</span><span>Weiß</span></div></div>
+            </section>
+            <div class="board-center">
+              <div class="cs-player"><span class="cs-player-name"><span class="cs-stone" id="opponent-stone"></span>Trainingspartner</span><span class="cs-muted" id="bot-label"></span></div>
+              <div class="cs-boardwrap"><div class="cs-ranks" id="ranks" aria-hidden="true"></div><div class="cs-board" id="board" role="group" aria-label="Schachbrett"></div><div class="cs-files" id="files" aria-hidden="true"></div></div>
+              <div class="cs-player cs-player-bottom"><span class="cs-player-name"><span class="cs-stone cs-hollow" id="human-stone"></span><span id="player-label"></span></span><span class="cs-muted" id="turn-label" aria-live="polite"></span></div>
+            </div>
+            <section class="material-panel" id="material-panel" aria-label="Geschlagene Figuren und Material"></section>
+          </div>
+          <div class="cs-board-caption cs-sr"><span class="cs-caption-label" id="game-caption">Dein nächster Gedanke.</span><span class="cs-muted">Ohne Zeitdruck</span></div>
+
+        </div>
+        <aside class="cs-coach" aria-label="Dein Coach">
+          <div class="cs-coach-top"><h2>Coach</h2><button class="tool-button" data-action="coach-info" aria-label="Über den Coach" title="Über den Coach"><i data-lucide="info" aria-hidden="true"></i></button></div>
+          <div class="cs-coach-body" id="coach-content"></div>
+          <div class="cs-coach-actions" id="coach-actions"></div>
+        </aside>
+      </section>
+      <section id="loading" class="empty"><h2>Chess Lab</h2><p>Dein Training wird geladen …</p></section>
+    </main>
+    <footer class="cs-bottom"><span>Dein Tempo. Deine Partie.</span><span id="save-status" role="status">Lokal gespeichert</span></footer>
+  </div>
+  <p class="app-footnote">Persönliche Testversion · Standardhinweise + lokaler KI-Dialog · Keine Cloud-Verbindung</p>
+  <dialog id="modal" aria-labelledby="modal-title"><div id="modal-content"></div><button class="cs-textbutton modal-close" data-action="close-modal" aria-label="Dialog schließen">Schließen ×</button></dialog>
+</div>
+</body>
+</html>

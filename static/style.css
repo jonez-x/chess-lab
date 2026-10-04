@@ -1,0 +1,318 @@
+
+    #chess-studio-v1{--cs-paper:light-dark(#faf9f6,#20201f);--cs-ink:light-dark(#22221f,#f1f0eb);--cs-quiet:light-dark(#6b6b65,#b7b7af);--cs-line:light-dark(#deded6,#454540);--cs-surface:light-dark(#f1f0eb,#292926);--cs-light:light-dark(#eeede6,#96968d);--cs-dark:light-dark(#c8c8c4,#686864);--cs-serif:Georgia,'Times New Roman',serif;--cs-radius:4px;color:var(--cs-ink);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px;line-height:1.5;width:100%;color-scheme:light;background:var(--cs-paper)}
+    #chess-studio-v1 *{box-sizing:border-box}
+    #chess-studio-v1 button,#chess-studio-v1 select{font:inherit;color:inherit}
+    #chess-studio-v1 button{cursor:pointer}
+    #chess-studio-v1 button:focus-visible,#chess-studio-v1 select:focus-visible{outline:2px solid var(--cs-ink);outline-offset:4px}
+    #chess-studio-v1 button:disabled{opacity:.45;cursor:default}
+    #chess-studio-v1 [hidden]{display:none!important}
+    #chess-studio-v1 h1,#chess-studio-v1 h2,#chess-studio-v1 h3,#chess-studio-v1 p{margin:0}
+    #chess-studio-v1 h1,#chess-studio-v1 h2,#chess-studio-v1 h3{font-weight:400;line-height:1.12;font-family:var(--cs-serif);letter-spacing:-.035em}
+    #chess-studio-v1 h1{font-size:48px;max-width:500px}
+    #chess-studio-v1 h2{font-size:36px}
+    #chess-studio-v1 h3{font-size:27px}
+    #chess-studio-v1 .cs-preview{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:14px 16px 18px}
+    #chess-studio-v1 .cs-kicker{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:500}
+    #chess-studio-v1 .cs-muted{color:var(--cs-quiet)}
+    #chess-studio-v1 .cs-tabs{display:flex;gap:4px;flex-wrap:wrap}
+    #chess-studio-v1 .cs-tab{background:transparent;border:0;padding:8px 12px;border-radius:var(--cs-radius);font-size:12px;color:var(--cs-quiet)}
+    #chess-studio-v1 .cs-tab[aria-pressed=true]{background:var(--cs-ink);color:var(--cs-paper)}
+    #chess-studio-v1 .cs-window{background:var(--cs-paper);border:1px solid var(--cs-line);border-radius:var(--cs-radius);overflow:hidden}
+    #chess-studio-v1 .cs-header{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:24px 32px;border-bottom:1px solid var(--cs-line)}
+    #chess-studio-v1 .cs-brand{font-family:var(--cs-serif);font-size:29px;letter-spacing:-.07em;line-height:1}
+    #chess-studio-v1 .cs-brand small{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:10px;font-weight:400;letter-spacing:.18em;display:block;margin-top:9px}
+    #chess-studio-v1 .cs-header-right{display:flex;align-items:center;gap:20px;font-size:12px}
+    #chess-studio-v1 .cs-textbutton{background:transparent;border:0;border-bottom:1px solid var(--cs-line);padding:3px 0;font-size:12px}
+    #chess-studio-v1 .cs-button{display:inline-flex;align-items:center;justify-content:center;gap:12px;background:transparent;border:1px solid var(--cs-line);border-radius:var(--cs-radius);padding:12px 18px;min-height:44px;font-size:13px;font-weight:500;transition:background .15s}
+    #chess-studio-v1 .cs-button:hover{background:var(--cs-surface)}
+    #chess-studio-v1 .cs-primary{background:var(--cs-ink);color:var(--cs-paper);border-color:var(--cs-ink)}
+    #chess-studio-v1 .cs-primary:hover{background:var(--cs-quiet);border-color:var(--cs-quiet)}
+    #chess-studio-v1 .cs-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    #chess-studio-v1 .cs-onboard{display:grid;grid-template-columns:1.05fr 1fr;min-height:556px}
+    #chess-studio-v1 .cs-intro{padding:48px 40px;background:var(--cs-surface);display:flex;flex-direction:column;justify-content:space-between;gap:34px}
+    #chess-studio-v1 .cs-intro h1{margin:18px 0 22px}
+    #chess-studio-v1 .cs-intro p{max-width:305px;color:var(--cs-quiet);font-size:14px;line-height:1.65}
+    #chess-studio-v1 .cs-piece-row{display:flex;align-items:end;gap:5px;border-bottom:1px solid var(--cs-line);padding:14px 0 24px}
+    #chess-studio-v1 .cs-piece-row .cs-piece{position:relative;width:50px;height:64px;flex:none}
+    #chess-studio-v1 .cs-form{padding:48px 36px;display:flex;flex-direction:column;gap:24px;justify-content:space-between}
+    #chess-studio-v1 .cs-form-head{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    #chess-studio-v1 .cs-dots{display:flex;gap:7px}
+    #chess-studio-v1 .cs-dots span{width:5px;height:5px;border-radius:50%;background:var(--cs-line)}
+    #chess-studio-v1 .cs-dots span.cs-active{background:var(--cs-ink)}
+    #chess-studio-v1 .cs-form h3{margin:0 0 13px}
+    #chess-studio-v1 .cs-form p{color:var(--cs-quiet);font-size:13px}
+    #chess-studio-v1 .cs-choices{display:grid;gap:8px;margin-top:23px}
+    #chess-studio-v1 .cs-choice{display:flex;align-items:center;justify-content:space-between;gap:16px;text-align:left;padding:14px 16px;border:1px solid var(--cs-line);border-radius:var(--cs-radius);background:transparent;min-height:62px}
+    #chess-studio-v1 .cs-choice[aria-pressed=true]{border-color:var(--cs-ink);background:var(--cs-surface)}
+    #chess-studio-v1 .cs-choice strong{display:block;font-weight:500;font-size:13px}
+    #chess-studio-v1 .cs-choice small{display:block;font-size:12px;color:var(--cs-quiet);margin-top:2px}
+    #chess-studio-v1 .cs-radio{width:14px;height:14px;border:1px solid var(--cs-quiet);border-radius:50%;flex:none}
+    #chess-studio-v1 .cs-choice[aria-pressed=true] .cs-radio{background:var(--cs-ink);box-shadow:inset 0 0 0 3px var(--cs-paper)}
+    #chess-studio-v1 .cs-explain-row{display:grid;grid-template-columns:23px 1fr;gap:12px;padding:16px 0;border-top:1px solid var(--cs-line)}
+    #chess-studio-v1 .cs-explain-row strong{display:block;font-size:13px;font-weight:500;margin-bottom:3px}
+    #chess-studio-v1 .cs-explain-row span{font-family:var(--cs-serif);font-size:19px}
+    #chess-studio-v1 .cs-game{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(235px,1fr);gap:0}
+    #chess-studio-v1 .cs-board-column{padding:27px 30px 26px;min-width:0}
+    #chess-studio-v1 .cs-player{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:12px;padding:0 0 14px 22px}
+    #chess-studio-v1 .cs-player-bottom{padding:14px 0 0 22px}
+    #chess-studio-v1 .cs-player-name{display:flex;align-items:center;gap:9px}
+    #chess-studio-v1 .cs-stone{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--cs-ink)}
+    #chess-studio-v1 .cs-stone.cs-hollow{background:var(--cs-paper);border:1px solid var(--cs-ink)}
+    #chess-studio-v1 .cs-boardwrap{position:relative;padding-left:22px;padding-bottom:22px;max-width:560px;margin:0 auto}
+    #chess-studio-v1 .cs-ranks{position:absolute;left:0;top:0;bottom:22px;width:16px;display:grid;grid-template-rows:repeat(8,1fr);align-items:center;text-align:center;font-size:11px;color:var(--cs-quiet)}
+    #chess-studio-v1 .cs-files{position:absolute;bottom:0;left:22px;right:0;height:18px;display:grid;grid-template-columns:repeat(8,1fr);text-align:center;align-items:end;font-size:11px;color:var(--cs-quiet)}
+    #chess-studio-v1 .cs-board{aspect-ratio:1;display:grid;grid-template-columns:repeat(8,1fr);position:relative;isolation:isolate;overflow:hidden}
+    #chess-studio-v1 .cs-square{position:relative;aspect-ratio:1;background:var(--cs-light);display:grid;place-items:center;padding:0;border:0;border-radius:0;min-width:0;color:#242523;cursor:default}
+    #chess-studio-v1 .cs-square.cs-dark{background:var(--cs-dark)}
+    #chess-studio-v1 .cs-square.cs-selected:after{content:'';position:absolute;inset:3px;border:2px solid #252624;z-index:3;pointer-events:none}
+    #chess-studio-v1 .cs-square.cs-region:after{content:'';position:absolute;inset:4px;border:1.5px dashed #252624;pointer-events:none}
+    #chess-studio-v1 .cs-square.cs-target:before{content:'';width:15%;height:15%;background:#252624;border-radius:50%;position:absolute;z-index:3}
+    #chess-studio-v1 .cs-square[data-square=d4],#chess-studio-v1 .cs-square[data-square=d5]{cursor:pointer}
+    #chess-studio-v1 .cs-piece{--piece-fill:#272725;--piece-line:#272725;position:absolute;width:73%;height:82%;display:grid;place-items:center;pointer-events:none;filter:drop-shadow(0 .6px 0 #f7f6f0) drop-shadow(0 -.6px 0 #f7f6f0)}
+    #chess-studio-v1 .cs-piece.cs-white{--piece-fill:#fdfcf7;--piece-line:#252523;filter:none}
+    #chess-studio-v1 .cs-piece svg{display:block;width:100%!important;height:100%!important;fill:var(--piece-fill);stroke:var(--piece-line);stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round}
+    #chess-studio-v1 .cs-board .cs-piece.cs-p{width:65%;height:77%}
+    #chess-studio-v1 .cs-board .cs-piece.cs-n{width:75%;height:82%}
+    #chess-studio-v1 .cs-piece-fallback{font-size:22px;color:var(--piece-line);font-weight:500}
+    #chess-studio-v1 .cs-piece:has(svg) .cs-piece-fallback{display:none}
+    #chess-studio-v1 .cs-appearance{display:inline-flex;gap:2px;background:var(--cs-surface);padding:3px;border-radius:5px}
+    #chess-studio-v1 .cs-appearance button{border:0;background:transparent;color:var(--cs-quiet);border-radius:3px;padding:5px 9px;min-height:30px;font-size:11px}
+    #chess-studio-v1 .cs-appearance button[aria-pressed=true]{background:var(--cs-paper);color:var(--cs-ink);box-shadow:0 1px 3px #00000012}
+    #chess-studio-v1 .cs-board-note{position:absolute;left:52%;top:41%;max-width:44%;z-index:5;background:var(--cs-paper);color:var(--cs-ink);padding:5px 8px;border:1px solid var(--cs-line);border-radius:var(--cs-radius);font-size:11px;pointer-events:none}
+    #chess-studio-v1 .cs-overlay{position:absolute;inset:0;width:100%;height:100%;z-index:4;pointer-events:none}
+    #chess-studio-v1 .cs-board-caption{margin:24px 0 0 22px;display:flex;justify-content:space-between;gap:16px;align-items:center;border-top:1px solid var(--cs-line);padding-top:18px;font-size:12px}
+    #chess-studio-v1 .cs-caption-label{font-family:var(--cs-serif);font-size:20px;color:var(--cs-ink)}
+    #chess-studio-v1 .cs-coach{padding:32px 28px;border-left:1px solid var(--cs-line);display:flex;flex-direction:column;gap:28px;min-width:0}
+    #chess-studio-v1 .cs-coach-top{display:flex;justify-content:space-between;gap:12px;align-items:center}
+    #chess-studio-v1 .cs-coach-status{display:flex;gap:6px;align-items:center;font-size:11px;color:var(--cs-quiet)}
+    #chess-studio-v1 .cs-coach-status:before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor}
+    #chess-studio-v1 .cs-coach-body{flex:1;display:flex;flex-direction:column;gap:20px}
+    #chess-studio-v1 .cs-coach-body p{font-size:13px;line-height:1.75;color:var(--cs-quiet)}
+    #chess-studio-v1 .cs-noted{border-left:2px solid var(--cs-ink);padding:2px 0 2px 13px;font-size:12px}
+    #chess-studio-v1 .cs-moves{border-top:1px solid var(--cs-line);padding-top:18px}
+    #chess-studio-v1 .cs-move-row{display:grid;grid-template-columns:28px 1fr 1fr;gap:8px;font-size:12px;padding:6px 0;font-variant-numeric:tabular-nums}
+    #chess-studio-v1 .cs-move-row span:first-child{color:var(--cs-quiet)}
+    #chess-studio-v1 .cs-move-row:last-child strong{font-weight:500;background:var(--cs-surface);padding-left:6px;margin-left:-6px;border-radius:2px}
+    #chess-studio-v1 .cs-bottom{display:flex;align-items:center;justify-content:space-between;gap:16px;border-top:1px solid var(--cs-line);padding:14px 32px;font-size:11px;color:var(--cs-quiet)}
+    #chess-studio-v1 .cs-footer{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:12px 16px;color:var(--cs-quiet);font-size:11px}
+    #chess-studio-v1 .cs-help-link{font-size:12px;color:var(--cs-quiet);background:transparent;border:0;padding:4px 0;text-align:left}
+    #chess-studio-v1 .cs-coach-actions{display:grid;gap:10px}
+    #chess-studio-v1 .cs-step-label{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--cs-quiet)}
+    #chess-studio-v1 .cs-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    @media(max-width:760px){#chess-studio-v1 .cs-game{grid-template-columns:minmax(0,1.4fr) minmax(210px,1fr)}#chess-studio-v1 .cs-board-column{padding:24px 17px}#chess-studio-v1 .cs-coach{padding:28px 20px}#chess-studio-v1 .cs-onboard{grid-template-columns:1fr 1fr}#chess-studio-v1 .cs-intro,#chess-studio-v1 .cs-form{padding:34px 24px}#chess-studio-v1 h1{font-size:40px}}
+    @media(max-width:580px){#chess-studio-v1 .cs-game,#chess-studio-v1 .cs-onboard{grid-template-columns:1fr}#chess-studio-v1 .cs-coach{border-left:0;border-top:1px solid var(--cs-line)}#chess-studio-v1 .cs-header{padding:20px}#chess-studio-v1 .cs-header-right{gap:12px;flex-wrap:wrap;justify-content:flex-end}#chess-studio-v1 .cs-header-right>span{display:none}#chess-studio-v1 .cs-header{align-items:flex-start}#chess-studio-v1 .cs-intro{padding:30px 24px}#chess-studio-v1 .cs-piece-row{display:none}#chess-studio-v1 .cs-form{min-height:380px;padding:30px 24px}#chess-studio-v1 h1{font-size:38px}#chess-studio-v1 .cs-preview{gap:10px}#chess-studio-v1 .cs-tabs{gap:0}#chess-studio-v1 .cs-tab{padding:9px}#chess-studio-v1 .cs-bottom{padding:14px 20px;flex-wrap:wrap}#chess-studio-v1 .cs-board-column{padding:23px 16px}#chess-studio-v1 .cs-moves{display:none}}
+@media(prefers-reduced-motion:reduce){#chess-studio-v1 *{transition:none!important}}
+@media(prefers-reduced-motion:reduce){#chess-studio-v1 .cs-piece-arriving,#chess-studio-v1 .cs-capture-arrival:after{animation:none!important}}
+  /* Application shell, preserving the approved study 02 board and pieces. */
+html{min-width:320px;background:light-dark(#f4f3ef,#191918)}
+body{margin:0;padding:30px 24px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+#chess-studio-v1{max-width:1240px;margin:0 auto}
+#chess-studio-v1 .cs-window{border-radius:4px}
+#chess-studio-v1 .cs-brand{text-decoration:none;color:var(--cs-ink)}
+#chess-studio-v1 .cs-game{grid-template-columns:minmax(0,1.7fr) minmax(290px,1fr)}
+#chess-studio-v1 .cs-boardwrap{max-width:700px}
+#chess-studio-v1 .cs-board-column{padding:30px 38px}
+#chess-studio-v1 .cs-board .cs-square{cursor:pointer}
+#chess-studio-v1 .cs-board .cs-square:focus-visible{outline:3px solid #252523;outline-offset:-4px;z-index:6}
+#chess-studio-v1 .cs-last{box-shadow:inset 0 0 0 2px #25252335}
+#chess-studio-v1 .cs-check:after{content:'';position:absolute;inset:2px;border:3px double #252523;pointer-events:none}
+#chess-studio-v1 .cs-coach{padding:34px 30px;gap:28px}
+#chess-studio-v1 .cs-coach-actions{display:grid;gap:10px}
+#chess-studio-v1 .cs-board-tools{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:22px 0 0 22px;font-size:12px}
+#chess-studio-v1 .cs-board-tools a{color:var(--cs-quiet);text-decoration:none;border-bottom:1px solid var(--cs-line)}
+#chess-studio-v1 .advantage-strip{margin:18px 0 0 22px;max-width:700px}
+#chess-studio-v1 .advantage-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:7px}
+#chess-studio-v1 .advantage-value{font-size:12px;letter-spacing:.01em}
+#chess-studio-v1 .advantage-track{position:relative;height:8px;border-radius:999px;overflow:visible;background:linear-gradient(90deg,#f2f1ec 0%,#d8d7d0 50%,#6a6a66 100%);box-shadow:inset 0 0 0 1px #25252324}
+#chess-studio-v1 .advantage-track:after{content:'';position:absolute;left:50%;top:-3px;bottom:-3px;width:1px;background:#25252355}
+#chess-studio-v1 #advantage-marker{position:absolute;left:50%;top:50%;width:14px;height:14px;border:2px solid var(--cs-ink);background:var(--cs-paper);border-radius:50%;transform:translate(-50%,-50%);transition:left .32s cubic-bezier(.2,.8,.2,1),background-color .2s ease;z-index:1}
+#chess-studio-v1 .advantage-strip.is-black #advantage-marker{background:var(--cs-ink)}
+#chess-studio-v1 .advantage-strip.is-pending .advantage-track{animation:advantage-pulse 1.2s ease-in-out infinite}
+#chess-studio-v1 .advantage-scale{display:flex;justify-content:space-between;margin-top:6px;font-size:10px;color:var(--cs-quiet)}
+@keyframes advantage-pulse{0%,100%{opacity:.45}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){#chess-studio-v1 .advantage-track{animation:none!important}#chess-studio-v1 #advantage-marker{transition:none}}
+#chess-studio-v1 .cs-iconbutton{display:grid;place-items:center;background:transparent;border:0;padding:7px}
+#chess-studio-v1 .cs-coach-body{min-height:225px}
+#chess-studio-v1 .cs-moves{padding-top:20px}
+#chess-studio-v1 .moves-heading{display:flex;justify-content:space-between;gap:12px;font-size:11px;margin-bottom:12px}
+#chess-studio-v1 .move-scroll{max-height:175px;overflow:auto}
+#chess-studio-v1 .move-scroll .cs-move-row:last-child{background:var(--cs-surface)}
+#chess-studio-v1 .cs-square svg{max-width:none}
+#chess-studio-v1 .empty{padding:100px 30px;text-align:center;display:grid;gap:20px}
+#chess-studio-v1 #notice{background:var(--cs-surface);border-bottom:1px solid var(--cs-line);padding:15px 32px;font-size:13px}
+#chess-studio-v1 .small{font-size:12px;line-height:1.6}
+#chess-studio-v1 .app-footnote{font-size:11px;color:var(--cs-quiet);text-align:center;padding:16px;background:light-dark(#f4f3ef,#191918)}
+#chess-studio-v1 .color-choice{display:flex;gap:8px;margin-top:18px}
+#chess-studio-v1 .color-choice button{flex:1;font-size:12px;padding:10px}
+#chess-studio-v1 .color-choice button[aria-pressed=true]{background:var(--cs-ink);color:var(--cs-paper)}
+#chess-studio-v1 .reflection{font-size:12px;color:var(--cs-quiet)}
+#chess-studio-v1 .reflection summary{cursor:pointer}
+#chess-studio-v1 .reflection label{display:block;margin:15px 0 8px}
+#chess-studio-v1 input,#chess-studio-v1 select,#chess-studio-v1 textarea{box-sizing:border-box;font:inherit;background:var(--cs-paper);color:var(--cs-ink);border:1px solid var(--cs-line);border-radius:4px;padding:10px;width:100%;max-width:100%}
+#chess-studio-v1 textarea{resize:vertical;min-height:70px;margin-bottom:8px}
+#chess-studio-v1 dialog{box-sizing:border-box;background:var(--cs-paper);color:var(--cs-ink);border:1px solid var(--cs-line);border-radius:5px;width:min(570px,calc(100vw - 36px));max-height:85vh;padding:36px;overflow:auto}
+#chess-studio-v1 dialog::backdrop{background:#0006;backdrop-filter:blur(3px)}
+#chess-studio-v1 dialog h2{margin:12px 0 18px;font-size:34px}
+#chess-studio-v1 dialog h3{font-size:22px;margin:28px 0 12px}
+#chess-studio-v1 dialog p{color:var(--cs-quiet);font-size:13px;line-height:1.7;margin:12px 0}
+#chess-studio-v1 .modal-close{margin-top:28px}
+#chess-studio-v1 .modal-actions,#chess-studio-v1 .promotion-options{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0}
+#chess-studio-v1 #settings-form{display:grid;gap:20px}
+#chess-studio-v1 #settings-form label{display:grid;gap:8px;font-size:13px}
+#chess-studio-v1 #settings-form .checkbox-label{display:flex;align-items:center}
+#chess-studio-v1 input[type=checkbox]{width:16px;height:16px;accent-color:var(--cs-ink)}
+#chess-studio-v1 .history-list{display:grid;margin:12px 0 24px}
+#chess-studio-v1 .history-game{display:flex;align-items:center;justify-content:space-between;gap:15px;background:transparent;border:0;border-bottom:1px solid var(--cs-line);padding:14px 0;text-align:left;font-size:13px}
+#chess-studio-v1 .history-game small{display:block;color:var(--cs-quiet);font-size:11px;margin-top:4px}
+#chess-studio-v1 .history-event{padding:12px 0;border-bottom:1px solid var(--cs-line);font-size:12px}
+#chess-studio-v1 .history-event strong{display:block;font-weight:500;margin-bottom:4px}
+#chess-studio-v1 .history-event span{color:var(--cs-quiet)}
+#chess-studio-v1.is-busy .cs-button,#chess-studio-v1.is-busy .cs-square{cursor:wait}
+@media(min-width:1450px){body{padding-top:50px}}
+@media(max-width:850px){body{padding:16px 12px}#chess-studio-v1 .cs-header{padding:20px}#chess-studio-v1 .cs-header-right{gap:12px;flex-wrap:wrap;justify-content:flex-end}#chess-studio-v1 .cs-game{grid-template-columns:minmax(0,1.4fr) minmax(245px,1fr)}#chess-studio-v1 .cs-board-column{padding:24px 18px}#chess-studio-v1 .cs-coach{padding:24px 20px}#chess-studio-v1 h2{font-size:30px}}
+@media(max-width:690px){#chess-studio-v1 .cs-game{grid-template-columns:1fr}#chess-studio-v1 .cs-coach{border-left:0;border-top:1px solid var(--cs-line)}#chess-studio-v1 .cs-coach-body{min-height:0}#chess-studio-v1 .cs-header{align-items:flex-start}#chess-studio-v1 .cs-header-right{max-width:230px}#chess-studio-v1 .cs-header-right .cs-textbutton{font-size:11px}#chess-studio-v1 .cs-board-tools{gap:14px}#chess-studio-v1 .cs-onboard{grid-template-columns:1fr}#chess-studio-v1 .cs-intro{padding:30px}#chess-studio-v1 .cs-form{padding:28px}#chess-studio-v1 .cs-intro h1{font-size:40px}#chess-studio-v1 dialog{padding:24px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+@media(min-width:691px){#chess-studio-v1 .cs-boardwrap{width:min(100%,calc(100dvh - 285px));min-width:300px}}
+/* Unmodified classic Cburnett artwork. */
+#chess-studio-v1 .cs-board .cs-piece{width:88%;height:88%;filter:none}
+#chess-studio-v1 .cs-piece img{display:block;width:100%;height:100%;object-fit:contain;user-select:none;-webkit-user-drag:none}
+#chess-studio-v1 .cs-piece-arriving{z-index:6;will-change:transform,opacity;animation:cs-piece-arrive .52s cubic-bezier(.18,.82,.25,1) both}
+#chess-studio-v1 .cs-capture-arrival:after{content:'';position:absolute;inset:7%;border:2px solid currentColor;border-radius:50%;opacity:0;pointer-events:none;z-index:5;animation:cs-capture-arrive .48s cubic-bezier(.2,.8,.25,1) .06s both}
+@keyframes cs-piece-arrive{
+  0%{transform:translate(var(--move-x),var(--move-y)) scale(.92);opacity:.42;filter:drop-shadow(0 9px 5px #00000028)}
+  48%{transform:translate(0,-7%) scale(1.045);opacity:1;filter:drop-shadow(0 5px 3px #00000022)}
+  72%{transform:translate(0,2%) scale(.99);filter:drop-shadow(0 1px 1px #00000014)}
+  100%{transform:translate(0,0) scale(1);opacity:1;filter:none}
+}
+@keyframes cs-capture-arrive{
+  0%{opacity:0;transform:scale(.72)}
+  42%{opacity:.72;transform:scale(1.08)}
+  100%{opacity:0;transform:scale(1.34)}
+}
+#chess-studio-v1 .cs-square.cs-capture:before{content:'';position:absolute;inset:5%;border:5px solid #25252390;border-radius:50%;z-index:3;pointer-events:none;box-shadow:0 0 0 1.5px #f8f7efb0}
+#chess-studio-v1 .annotation-layer{position:absolute;inset:0;pointer-events:none;z-index:4}
+#chess-studio-v1 .annotation-tools{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin:18px 0 0 22px;font-size:11px}
+#chess-studio-v1 .annotation-tools button{font-size:12px;padding:5px 0}
+#chess-studio-v1 .annotation-tools [aria-pressed=true]{border-bottom:2px solid var(--cs-ink);font-weight:500}
+#chess-studio-v1 #board{user-select:none}
+#chess-studio-v1 #board.is-drawing{touch-action:none}
+#chess-studio-v1 #board.is-drawing .cs-square{cursor:crosshair}
+#chess-studio-v1 .arrow-start:after{content:'';position:absolute;inset:30%;border:1.5px solid #252523;border-radius:50%;background:#f8f7ef40;pointer-events:none}
+#chess-studio-v1 .board-arrow{opacity:.78}
+#chess-studio-v1 .board-arrow path{fill:#292b28;stroke:#f8f7ef;stroke-opacity:.7;stroke-width:1.5;stroke-linejoin:round}
+#chess-studio-v1 .coach-arrows .board-arrow{opacity:.94}
+#chess-studio-v1 .preview-arrows .board-arrow{opacity:.38}
+/* Conversation-led workspace. */
+#chess-studio-v1 .cs-header{padding:18px 24px}
+#chess-studio-v1 .cs-header-right{gap:22px}
+#chess-studio-v1 .cs-header-right>.cs-textbutton{border:0;font-size:12px;padding:8px 0}
+#chess-studio-v1 .cs-header-right>[data-action=new-menu]{border:1px solid var(--cs-line);border-radius:5px;padding:8px 12px}
+#chess-studio-v1 .cs-game{grid-template-columns:minmax(0,1.6fr) minmax(320px,1fr)}
+#chess-studio-v1 .cs-board-column{padding:14px 24px 20px}
+#chess-studio-v1 .board-toolbar{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin:0 0 16px 22px}
+#chess-studio-v1 .tool-group{display:flex;align-items:center;gap:2px}
+#chess-studio-v1 .tool-group+.tool-group{border-left:1px solid var(--cs-line);padding-left:10px}
+#chess-studio-v1 .tool-button{width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;padding:0;border:0;border-radius:5px;background:transparent;color:var(--cs-quiet);text-decoration:none;flex:none}
+#chess-studio-v1 .tool-button svg{width:17px;height:17px;stroke-width:1.7;pointer-events:none}
+#chess-studio-v1 .tool-button:hover{background:var(--cs-surface);color:var(--cs-ink)}
+#chess-studio-v1 .tool-button[aria-pressed=true]{background:var(--cs-surface);color:var(--cs-ink);box-shadow:inset 0 0 0 1px var(--cs-line)}
+#chess-studio-v1 .tool-button:focus-visible,#chess-studio-v1 summary:focus-visible{outline:2px solid var(--cs-ink);outline-offset:2px}
+#chess-studio-v1 .cs-player{font-size:12px;padding-bottom:10px}
+#chess-studio-v1 .cs-player-bottom{padding-top:10px;padding-bottom:0}
+#chess-studio-v1 .cs-boardwrap{width:100%;min-width:0;max-width:700px}
+#chess-studio-v1 .material-panel{margin:14px 0 0 22px;display:grid;gap:5px;font-size:12px}
+#chess-studio-v1 .material-row{display:flex;align-items:center;gap:10px;min-height:25px}
+#chess-studio-v1 .material-row>span{width:48px;color:var(--cs-quiet);flex:none}
+#chess-studio-v1 .captured-pieces{display:flex;align-items:center;flex-wrap:wrap;gap:1px;min-height:23px}
+#chess-studio-v1 .captured-pieces img{width:22px;height:23px;object-fit:contain;filter:drop-shadow(0 0 1px #e8e7df)}
+#chess-studio-v1 .material-lead{font-weight:500;font-size:12px;font-variant-numeric:tabular-nums}
+#chess-studio-v1 .cs-coach{padding:26px 24px 20px;gap:20px;min-height:550px;contain:size;overflow:hidden}
+#chess-studio-v1 .cs-coach-top{align-items:center;gap:10px;flex:none}
+#chess-studio-v1 .cs-coach-top h2{font-size:27px}
+#chess-studio-v1 .cs-coach-body{flex:1;display:flex;flex-direction:column;gap:12px;min-height:0}
+#chess-studio-v1 .cs-coach-body p{line-height:1.65;font-size:14px;color:var(--cs-ink)}
+#chess-studio-v1 .coach-dialogue{display:flex;flex-direction:column;flex:1;min-height:140px}
+#chess-studio-v1 .coach-transcript{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;padding-right:6px}
+#chess-studio-v1 .coach-message{margin:0 0 22px;max-width:96%;overflow-wrap:anywhere}
+#chess-studio-v1 .coach-message p{white-space:pre-wrap}
+#chess-studio-v1 .message-topic{display:block;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--cs-quiet);margin-bottom:12px}
+#chess-studio-v1 .coach-message.from-player{margin-left:auto;background:var(--cs-surface);border:1px solid var(--cs-line);border-radius:14px 14px 3px 14px;padding:11px 14px;max-width:88%}
+#chess-studio-v1 .coach-message.from-player p{font-size:13px}
+#chess-studio-v1 .typing-indicator,#chess-studio-v1 .chat-error{color:var(--cs-quiet);font-size:12px;padding:4px 0 12px}
+#chess-studio-v1 .coach-empty{flex:1;padding:24px 0}
+#chess-studio-v1 .coach-empty h3{font-size:26px;margin-bottom:16px}
+#chess-studio-v1 .coach-empty p{color:var(--cs-quiet);font-size:13px}
+#chess-studio-v1 .visual-coach{flex:none;border-top:1px solid var(--cs-line);padding-top:10px}
+#chess-studio-v1 .visual-picker{display:flex;align-items:center;gap:3px;min-width:0}
+#chess-studio-v1 .visual-picker select{width:auto;flex:1;min-width:0;border:0;background:transparent;font-size:12px;padding:7px 0;cursor:pointer}
+#chess-studio-v1 .visual-count{font-size:10px;color:var(--cs-quiet);margin:0 3px;font-variant-numeric:tabular-nums}
+#chess-studio-v1 .visual-picker .tool-button{width:26px;height:28px}
+#chess-studio-v1 .visual-details{font-size:11px;color:var(--cs-quiet);margin-top:4px}
+#chess-studio-v1 summary{cursor:pointer}
+#chess-studio-v1 .visual-details p{font-size:12px;margin:9px 0;max-height:100px;overflow:auto;color:var(--cs-quiet)}
+#chess-studio-v1 #coach-chat-form{flex:none;display:flex;align-items:flex-end;gap:8px;padding:10px;background:var(--cs-surface);border:1px solid var(--cs-line);border-radius:12px}
+#chess-studio-v1 #coach-chat-form:focus-within{border-color:var(--cs-quiet)}
+#chess-studio-v1 #coach-chat-form textarea{border:0;background:transparent;min-height:60px;max-height:140px;padding:4px;margin:0;resize:vertical;font-size:13px;line-height:1.5;outline:none}
+#chess-studio-v1 .send-button{display:grid;place-items:center;flex:none;width:32px;height:32px;border:0;border-radius:50%;background:var(--cs-ink);color:var(--cs-paper)}
+#chess-studio-v1 .send-button svg{width:17px;height:17px;pointer-events:none}
+#chess-studio-v1 .reflection{font-size:11px;color:var(--cs-quiet);flex:none}
+#chess-studio-v1 .reflection textarea{margin-top:8px}
+#chess-studio-v1 .reflection p{font-size:12px;max-height:85px;overflow:auto}
+#chess-studio-v1 .cs-coach-actions{flex:none;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+#chess-studio-v1 .cs-coach-actions [data-action=skip]{margin-left:auto}
+#chess-studio-v1 .cs-button{min-height:36px;padding:8px 12px}
+#chess-studio-v1 .cs-bottom{padding:10px 24px}
+#chess-studio-v1 .cs-square.cs-coach-focus{box-shadow:inset 0 0 0 3px #252523,inset 0 0 0 5px #f8f7ef}
+#chess-studio-v1 dialog .move-scroll{max-height:55vh}
+#chess-studio-v1 dialog .cs-move-row{padding:7px 10px}
+@media(min-width:1000px){#chess-studio-v1 .cs-board-column{padding-left:30px;padding-right:30px}#chess-studio-v1 .cs-coach{padding-left:28px;padding-right:28px}}
+@media(max-width:850px){#chess-studio-v1 .cs-game{grid-template-columns:minmax(0,1.2fr) minmax(300px,1fr)}#chess-studio-v1 .cs-board-column{padding:14px}#chess-studio-v1 .cs-coach{padding:22px 18px}}
+@media(max-width:690px){#chess-studio-v1 .cs-game{grid-template-columns:1fr}#chess-studio-v1 .cs-coach{contain:none;height:650px;min-height:0}#chess-studio-v1 .cs-header{align-items:center;gap:10px;padding:16px}#chess-studio-v1 .cs-header-right{gap:8px 14px;flex-wrap:wrap;max-width:240px}#chess-studio-v1 .board-toolbar{justify-content:flex-start;gap:6px}#chess-studio-v1 .tool-group+.tool-group{padding-left:6px}}
+#chess-studio-v1 .cs-coach-body{overflow-y:auto;scrollbar-width:thin}
+#chess-studio-v1 .reflection textarea{max-height:100px}
+/* Chess Lab: a pawn / flask mark with a serif and sans-serif wordmark. */
+#chess-studio-v1 .cs-brand{display:inline-flex;align-items:center;gap:13px;flex:none;letter-spacing:0}
+#chess-studio-v1 .brand-mark{display:block;width:32px;height:39px;flex:none;color:var(--cs-ink)}
+#chess-studio-v1 .brand-wordmark{display:flex;align-items:baseline;gap:8px}
+#chess-studio-v1 .brand-chess{font-family:var(--cs-serif);font-size:32px;font-weight:400;letter-spacing:-1.3px;line-height:1}
+#chess-studio-v1 .brand-lab{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:15px;font-weight:500;letter-spacing:2px;text-transform:uppercase;line-height:1}
+@media(max-width:690px){#chess-studio-v1 .cs-brand{gap:8px}#chess-studio-v1 .brand-mark{width:25px;height:31px}#chess-studio-v1 .brand-chess{font-size:26px}#chess-studio-v1 .brand-lab{font-size:12px;letter-spacing:1px}#chess-studio-v1 .brand-wordmark{gap:6px}}
+
+/* Give the board its own side rails while keeping the coach in view. */
+#chess-studio-v1{max-width:1600px}
+#chess-studio-v1 .cs-game{grid-template-columns:minmax(0,2.25fr) minmax(370px,1fr)}
+#chess-studio-v1 .board-stage{display:grid;grid-template-columns:minmax(0,66px) minmax(0,1fr) minmax(0,108px);gap:14px;align-items:stretch;max-width:1120px;margin:0 auto}
+#chess-studio-v1 .board-stage:has(.advantage-strip[hidden]){grid-template-columns:minmax(0,1fr) minmax(0,108px)}
+#chess-studio-v1 .board-center{min-width:0;width:100%;max-width:800px;margin:0 auto}
+#chess-studio-v1 .board-center .cs-player{width:100%;margin:0;padding-left:22px}
+#chess-studio-v1 .board-stage .cs-boardwrap{width:min(100%,calc(100dvh - 190px));min-width:0;max-width:800px;margin:0 auto}
+#chess-studio-v1 .advantage-strip{margin:0;max-width:none;width:auto;padding:31px 0;display:flex;flex-direction:column;align-items:center;min-width:0}
+#chess-studio-v1 .advantage-head{margin:0 0 8px;display:block;min-height:18px;text-align:center}
+#chess-studio-v1 .advantage-value{font-size:11px;font-variant-numeric:tabular-nums;white-space:nowrap}
+#chess-studio-v1 .advantage-rail{display:flex;align-items:stretch;justify-content:center;gap:7px;flex:1;min-height:0;width:100%}
+#chess-studio-v1 .advantage-track{width:11px;height:auto;flex:none;background:linear-gradient(to bottom,#676762 0%,#c7c7c0 50%,#f2f1eb 100%)}
+#chess-studio-v1 .advantage-track:after{left:-3px;right:-3px;top:50%;bottom:auto;width:auto;height:1px}
+#chess-studio-v1 #advantage-marker{left:50%;top:50%;transition:top .32s cubic-bezier(.2,.8,.2,1),background-color .2s ease}
+#chess-studio-v1 .advantage-scale{display:flex;flex-direction:column;justify-content:space-between;margin:0;font-size:10px;line-height:1.2;white-space:nowrap}
+#chess-studio-v1 .material-panel{margin:0;display:flex;flex-direction:column;justify-content:space-between;gap:20px;padding:31px 0;min-width:0}
+#chess-studio-v1 .material-row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-content:start;align-items:center;gap:5px;min-height:0}
+#chess-studio-v1 .material-row>span{width:auto;grid-column:1;color:var(--cs-quiet)}
+#chess-studio-v1 .material-lead{grid-column:2;grid-row:1}
+#chess-studio-v1 .captured-pieces{grid-column:1/-1;align-content:start;min-height:24px;max-width:100%}
+@media(max-width:1100px){
+  #chess-studio-v1 .cs-game{grid-template-columns:1fr}
+  #chess-studio-v1 .cs-coach{contain:none;min-height:450px;border-left:0;border-top:1px solid var(--cs-line)}
+  #chess-studio-v1 .board-stage{max-width:860px}
+}
+@media(max-width:600px){
+  #chess-studio-v1 .board-stage{grid-template-columns:32px minmax(0,1fr);gap:6px}
+  #chess-studio-v1 .board-stage:has(.advantage-strip[hidden]){grid-template-columns:minmax(0,1fr)}
+  #chess-studio-v1 .advantage-scale{display:none}
+  #chess-studio-v1 .advantage-rail{gap:3px}
+  #chess-studio-v1 .advantage-value{font-size:9px}
+  #chess-studio-v1 .material-panel{grid-column:1/-1;flex-direction:row;gap:14px;padding:0 0 4px 38px;font-size:10px}
+  #chess-studio-v1 .material-row{width:50%}
+  #chess-studio-v1 .captured-pieces img{width:18px;height:19px}
+  #chess-studio-v1 .board-center .cs-player{padding-left:16px}
+}

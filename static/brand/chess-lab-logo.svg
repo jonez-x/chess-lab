@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 270 76" role="img" aria-labelledby="title"><title id="title">Chess Lab</title><g transform="translate(6 8)" color="#22221f"><circle cx="24" cy="9" r="6" fill="currentColor"/>
+  <g fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M18 20h12M20 20v7L11 42c-1.4 2.5-.1 5 3 5h20c3.1 0 4.4-2.5 3-5l-9-15v-7"/>
+    <path d="M10 53h28"/>
+  </g>
+  <path d="M16.4 35h15.2l5 8.4c.4.7 0 1.2-.7 1.2H12.1c-.7 0-1.1-.5-.7-1.2Z" fill="currentColor"/></g><text x="72" y="49" fill="#22221f" font-family="Georgia,serif" font-size="38" letter-spacing="-1.5">Chess</text><text x="181" y="48" fill="#22221f" font-family="Arial,sans-serif" font-size="20" letter-spacing="2.5">LAB</text></svg>
