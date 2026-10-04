@@ -1,7 +1,7 @@
 """Authoritative chess state, durable storage, revisioned background engine jobs."""
 from concurrent.futures import ThreadPoolExecutor
 from copy import deepcopy
-from contextlib import contextmanager
+from contextlib import closing, contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
 import io
@@ -164,13 +164,13 @@ class Store:
 
     def backup(self):
         # SQLite backup API yields a consistent standalone file, even while the app runs.
-        with self.connect() as source, sqlite3.connect(':memory:') as target:
+        with self.connect() as source, closing(sqlite3.connect(':memory:')) as target:
             source.backup(target)
             # serialize is only available in newer Python; a temp file also works on 3.9.
             import tempfile
             with tempfile.TemporaryDirectory() as temp:
                 path = Path(temp) / 'schachcoach.sqlite3'
-                with sqlite3.connect(str(path)) as dest:
+                with closing(sqlite3.connect(str(path))) as dest:
                     target.backup(dest)
                 return path.read_bytes()
 

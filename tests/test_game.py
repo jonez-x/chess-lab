@@ -1,4 +1,5 @@
 import io
+from contextlib import closing
 import json
 from pathlib import Path
 import sqlite3
@@ -183,7 +184,7 @@ class GameTests(unittest.TestCase):
         self.cmd('example');self.cmd('settings',settings={'theme':'dark','level':'returning'})
         before=self.app.board().fen()
         backup=Path(self.tmp.name)/'backup.sqlite3';backup.write_bytes(self.app.store.backup())
-        with sqlite3.connect(backup) as db:self.assertEqual('ok',db.execute('PRAGMA integrity_check').fetchone()[0])
+        with closing(sqlite3.connect(backup)) as db:self.assertEqual('ok',db.execute('PRAGMA integrity_check').fetchone()[0])
         app=GameService(backup,FakeEngine())
         try:
             self.assertEqual(before,app.board().fen())
